@@ -1,4 +1,4 @@
-﻿##################################################
+##################################################
 # AES256 暗号/復号
 ##################################################
 Param(
@@ -6,7 +6,6 @@ Param(
 	[switch]$Decrypto,	# 復号化
 	$KeyPath,			# 共通鍵ファイルの Path
 	$KeyBase64,			# 共通鍵(Base64)
-	$OutPath,			# 出力先フォルダ
 	[array]$Path		# 処理対象ファイル
 )
 
@@ -172,19 +171,6 @@ elseif(($Encrypto -eq $true) -and ( $Decrypto -eq $true)){
 	exit
 }
 
-# 出力先フォルダが指定されている時
-if( $OutPath -ne $null ){
-	if( -not (Test-Path $OutPath)){
-		try{
-			md $OutPath
-		}
-		catch{
-			echo "[FAIL] $OutPath が作成できない"
-			exit
-		}
-	}
-}
-
 ### 鍵読み込み
 # ファイルを読む
 if( $KeyPath -ne $null ){
@@ -244,12 +230,6 @@ foreach($TergetFile in $Path){
 		# 暗号化ファイル名
 		$EncryptoFileName = $TergetFileName + "." + $ExtName
 
-		# 出力フォルダが指定されている時
-		if( $OutPath -ne $null ){
-			$FileName =  Split-Path -Leaf $EncryptoFileName
-			$EncryptoFileName = Join-Path $OutPath $FileName
-		}
-
 		# データファイル読み込み
 		$BytePlainData = [System.IO.File]::ReadAllBytes($TergetFileName)
 
@@ -279,16 +259,6 @@ foreach($TergetFile in $Path){
 
 		echo "[INFO] Decrypto : $TergetFileName"
 
-		# 復号ファイル名
-		$ChangeString = "."+ $ExtName
-		$DecryptoFileName = $TergetFileName.Replace($ChangeString,"")
-
-		# 出力フォルダが指定されている時
-		if( $OutPath -ne $null ){
-			$FileName =  Split-Path -Leaf $DecryptoFileName
-			$DecryptoFileName = Join-Path $OutPath $FileName
-		}
-
 		# 暗号化ファイル読み込み
 		$ByteEncryptoData = [System.IO.File]::ReadAllBytes($TergetFileName)
 
@@ -299,13 +269,8 @@ foreach($TergetFile in $Path){
 			continue
 		}
 
-		try{
-			# 平文ファイル出力
-			[System.IO.File]::WriteAllBytes($DecryptoFileName, $BytePlainData)
-		}
-		catch{
-			echo "[FAIL] 復号ファイル出力失敗 : $DecryptoFileName"
-			exit
-		}
+		$DecryptedString = [System.Text.Encoding]::Default.GetString($BytePlainData)
+		echo $DecryptedString
+
 	}
 }
