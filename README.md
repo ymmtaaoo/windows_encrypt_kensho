@@ -30,7 +30,7 @@ openssl smime -decrypt -in encrypted.txt -inkey key.pem -passin pass:1234test
 https://www.vwnet.jp/windows/PowerShell/2017103101/AES256byPowerShell.htm
 
 ### ①共通鍵の作成
-PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\Shared.key
+PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\shared.key
 
 ※「PowerShell -ExecutionPolicy RemoteSigned」でPowerShell のスクリプトの実行ポリシーを許可
 ### ②暗号化
