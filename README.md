@@ -38,16 +38,18 @@ Make256Key.ps1
 #### 共通鍵の作成コマンド：Make256Key.ps1 共通鍵のフルパス
 PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\share.key
 
- ※「**PowerShell -ExecutionPolicy RemoteSigned**」でPowerShell のスクリプトの実行ポリシーを許可
+　　※「**PowerShell -ExecutionPolicy RemoteSigned**」でPowerShell のスクリプトの実行ポリシーを許可
  
- ※上記のpowershellファイルが配置されているディレクトリで以下コマンドを実行
+　　※上記のpowershellファイルが配置されているディレクトリで以下コマンドを実行
 ### ②暗号化
 #### 暗号化コマンド：AES256.ps1 -Encrypto -KeyPath 共通鍵のフルパス -OutPath 出力先フォルダ(省略可) -Path 暗号化するファイル
 
 PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share.key -OutPath .\encrypto -Path .\plain.txt
+
+　　→暗号化された文字が「カレントディレクトリ\encrypto\plain.txt.enc」に作成される。
 ### ③復号
 #### 復号コマンド：AES256.ps1 -Decrypto -KeyPath 共通鍵のフルパス -OutPath 出力先フォルダ(省略可) -Path 復号化するファイル
 
 PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -OutPath .\decrypto -Path .\encrypto\plain.txt.enc
 
-
+　　→復号された文字が「カレントディレクトリ\decrypto\plain.txt」に作成される。
