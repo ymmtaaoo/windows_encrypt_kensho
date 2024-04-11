@@ -30,16 +30,20 @@ openssl smime -decrypt -in encrypted.txt -inkey key.pem -passin pass:1234test
 https://www.vwnet.jp/windows/PowerShell/2017103101/AES256byPowerShell.htm
 
 ### ①共通鍵の作成
-PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\shared.key
+Make256Key.ps1 共通鍵のフルパス
 
-※「PowerShell -ExecutionPolicy RemoteSigned」でPowerShell のスクリプトの実行ポリシーを許可
+PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\share.key
+
+※「**PowerShell -ExecutionPolicy RemoteSigned**」でPowerShell のスクリプトの実行ポリシーを許可
 
 ### ②暗号化
-AES256.ps1 -Encrypto -KeyBase64 Base64共通鍵 -Path 暗号化するファイル 
+AES256.ps1 -Encrypto -KeyPath 共通鍵のフルパス -OutPath 出力先フォルダ(省略可) -Path 暗号化するファイル
 
-PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share.key -Path .\plain.txt
+PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share.key -OutPath .\encrypto -Path .\plain.txt
 
 ### ③復号化
-echo | PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -OutPath .\ -Path ..\plain.txt.enc
+AES256.ps1 -Decrypto -KeyPath 共通鍵のフルパス -OutPath 出力先フォルダ(省略可) -Path 復号化するファイル
+
+PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -OutPath .\decrypto -Path .\encrypto\plain.txt.enc
 
 
