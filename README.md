@@ -33,8 +33,13 @@ https://www.vwnet.jp/windows/PowerShell/2017103101/AES256byPowerShell.htm
 PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\shared.key
 
 ※「PowerShell -ExecutionPolicy RemoteSigned」でPowerShell のスクリプトの実行ポリシーを許可
+
 ### ②暗号化
-PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share.key -Path ..\plain.txt
+AES256.ps1 -Encrypto -KeyBase64 Base64共通鍵 -Path 暗号化するファイル 
+
+PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share.key -Path .\plain.txt
 
 ### ③復号化
 echo | PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -OutPath .\ -Path ..\plain.txt.enc
+
+
