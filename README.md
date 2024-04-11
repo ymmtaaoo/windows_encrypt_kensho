@@ -29,8 +29,15 @@ openssl smime -decrypt -in encrypted.txt -inkey key.pem -passin pass:1234test
 ## powershellの場合
 https://www.vwnet.jp/windows/PowerShell/2017103101/AES256byPowerShell.htm
 
+### まず以下のpowershellファイルをフォルダに配置する
+AES256.ps1
+
+Make256Key.ps1
+
 ### ①共通鍵の作成
 --# Make256Key.ps1 共通鍵のフルパス
+
+上記のpowershellファイルが配置されているディレクトリで以下コマンドを実行
 
 PowerShell -ExecutionPolicy RemoteSigned .\Make256Key.ps1 .\share.key
 
