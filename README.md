@@ -50,8 +50,10 @@ PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Encrypto -KeyPath .\share
 
 　　→暗号化された文字が「カレントディレクトリ\encrypto\plain.txt.enc」に作成される。
 ### ③復号
-#### 復号コマンド：AES256.ps1 -Decrypto -KeyPath 共通鍵のフルパス -OutPath 出力先フォルダ(省略可) -Path 復号化するファイル
+#### 復号コマンド：AES256.ps1 -Decrypto -KeyPath 共通鍵のフルパス -Path 復号化するファイル
 
-PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -OutPath .\decrypto -Path .\encrypto\plain.txt.enc
+PowerShell -ExecutionPolicy RemoteSigned .\AES256.ps1 -Decrypto -KeyPath .\share.key -Path .\encrypto\plain.txt.enc
 
-　　→復号された文字が「カレントディレクトリ\decrypto\plain.txt」に作成される。
+　　→復号された文字がコマンドラインに出力される
+  
+  　※参考のソースは復号された文字をファイル出力させていたが、コマンドラインに出力するように**AES256.ps1**を改修
