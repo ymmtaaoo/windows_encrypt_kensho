@@ -26,7 +26,7 @@ openssl smime -decrypt -in encrypted.txt -out decrypted.txt -inkey key.pem pass:
 
 openssl smime -decrypt -in encrypted.txt -inkey key.pem -passin pass:1234test
 
-## powershellの場合
+## powershellの場合（**powershellコマンドで実行する方法**）
 https://www.vwnet.jp/windows/PowerShell/2017103101/AES256byPowerShell.htm
 
 ### まず以下のpowershellファイルをフォルダに配置する
